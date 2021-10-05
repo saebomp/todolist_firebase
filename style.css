@@ -104,16 +104,18 @@ body {
     flex-grow: 1;
     display: flex;
     align-items: center;
+    padding-right:20px;
 }
 
 .new-todo-input input {
     width: 100%;
-    padding: 10px 0px;
+    padding: 10px 10px 10px 0;
     font-size: 18px;
-    background-color: transparent;
+    background-color: transparent !important;
     border: none;
     outline: none;
     color: hsl(234, 39%, 85%);
+    border-radius: 5px;
 }
 
 .new-todo-input form {
