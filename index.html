@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>To Do List App</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-    <script src="./firebase.js"></script>
-    <script src="./script.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script> -->
+    <!-- <script src="./firebase.js"></script> -->
+    <script src="./script.js" defer></script>
 </head>
 <body>
     <div class="background-image">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="new-todo-input">
-                <form onsubmit="addItem(event)">
+                <form id="submit-form">
                     <input id="todo-input" type="text" placeholder="Create a new todo..." />
                 </form>
             </div>
@@ -94,3 +94,4 @@
 
 <!-- https://www.youtube.com/watch?v=KA_8eOIsjn4 -->
 <!-- https://github.com/CleverProgrammers/challenge-todo-list -->
+<!-- https://console.firebase.google.com/u/0/project/wmdd-e1f74/overview -->
