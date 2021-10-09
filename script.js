@@ -4,5 +4,9 @@ form.addEventListener('submit', addItem);
 function addItem(e){
     e.preventDefault();
     let text = document.getElementById("todo-input")
-    console.log(text.value)
+    db.collection("todo-items").add({
+        text: text.value,
+        status:"active"
+    })
+    
 }
