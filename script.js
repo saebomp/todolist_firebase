@@ -23,8 +23,28 @@ getItems = () => {
                 ...doc.data()
             })
         })
-        console.log(items)
+        console.log(items);
+        generateItems(items)
     })
+}
+
+generateItems = (items) => {
+    let itemsHTML = ""
+    items.forEach((item)=> {
+        itemsHTML += `
+        <div class="todo-item">
+            <div class="check">
+                <div class="check-mark">
+                    <img src="assets/icon-check.svg">
+                </div>
+            </div>
+            <div class="todo-text">
+                ${item.text}
+            </div>
+        </div>
+        `
+    })
+    document.querySelector(".todo-items").innerHTML = itemsHTML
 }
 
 getItems();
