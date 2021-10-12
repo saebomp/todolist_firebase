@@ -34,7 +34,7 @@ generateItems = (items) => {
         itemsHTML += `
         <div class="todo-item">
             <div class="check">
-                <div class="check-mark">
+                <div data-id="${item.id}" class="check-mark">
                     <img src="assets/icon-check.svg">
                 </div>
             </div>
@@ -52,9 +52,30 @@ createEventListeners = () => {
     let todoCheckMarks = document.querySelectorAll(".todo-item .check-mark")
     todoCheckMarks.forEach((checkMark) => {
         checkMark.addEventListener("click", () => {
+            markCompleted(checkMark.dataset.id)
         })
     })
 }
 
+
+markCompleted = (id) => {
+
+    let item = db.collection("todo-items").doc(id);
+
+    item.get().then((doc) => {
+        if(doc.exists) {
+            let status = doc.data().status;
+            if(status == "active"){
+                item.update({
+                    status:"completed"
+                })
+            } else if (status == "completed"){
+                item.update({
+                    status:"active"
+                })
+            }
+        }
+    })
+}
 
 getItems();
