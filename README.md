@@ -1,5 +1,5 @@
 # TO DO LIST App with Firebase
-> Data is fetched from the Todo real-time database'
+> Data is fetched from the Todo real-time database
 
 # Status
 Project is in progress
