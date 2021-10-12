@@ -44,7 +44,17 @@ generateItems = (items) => {
         </div>
         `
     })
-    document.querySelector(".todo-items").innerHTML = itemsHTML
+    document.querySelector(".todo-items").innerHTML = itemsHTML;
+    createEventListeners()
 }
+
+createEventListeners = () => {
+    let todoCheckMarks = document.querySelectorAll(".todo-item .check-mark")
+    todoCheckMarks.forEach((checkMark) => {
+        checkMark.addEventListener("click", () => {
+        })
+    })
+}
+
 
 getItems();
