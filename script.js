@@ -34,13 +34,14 @@ generateItems = (items) => {
         itemsHTML += `
         <div class="todo-item">
             <div class="check">
-                <div data-id="${item.id}" class="check-mark">
+                <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked": ""}">
                     <img src="assets/icon-check.svg">
                 </div>
             </div>
-            <div class="todo-text">
+            <div class="todo-text ${item.status == "completed" ? "checked": ""}">
                 ${item.text}
             </div>
+            <div class="cancel"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
         </div>
         `
     })
