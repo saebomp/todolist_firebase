@@ -41,7 +41,7 @@ generateItems = (items) => {
             <div class="todo-text ${item.status == "completed" ? "checked": ""}">
                 ${item.text}
             </div>
-            <div class="cancel"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
+            <div class="cancel"><img data-id="${item.id}" src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
         </div>
         `
     })
@@ -57,7 +57,6 @@ createEventListeners = () => {
         })
     })
 }
-
 
 markCompleted = (id) => {
 
