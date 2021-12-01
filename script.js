@@ -1,4 +1,3 @@
-
 addItem = (e) => {
     e.preventDefault();
     let text = document.getElementById("todo-input")
@@ -9,8 +8,10 @@ addItem = (e) => {
     text.value = "";
 }
 
-const form = document.getElementById('submit-form')
+
+const form = document.getElementById('submit-form');
 form.addEventListener('submit', addItem);
+
 
 //realtime
 getItems = () => {
@@ -38,10 +39,10 @@ generateItems = (items) => {
                     <img src="assets/icon-check.svg">
                 </div>
             </div>
-            <div class="todo-text ${item.status == "completed" ? "checked": ""}">
+            <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
                 ${item.text}
             </div>
-            <div class="cancel"><img data-id="${item.id}" src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
+            <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
         </div>
         `
     })
@@ -59,7 +60,6 @@ createEventListeners = () => {
 }
 
 markCompleted = (id) => {
-
     let item = db.collection("todo-items").doc(id);
 
     item.get().then((doc) => {
@@ -79,3 +79,17 @@ markCompleted = (id) => {
 }
 
 getItems();
+
+const deleteBtn = document.getElementById('deleteBtn');
+deleteBtn.addEventListener('click', deleteItem);
+
+
+//Delete
+deleteItem = (id) => {
+    console.log(id);
+    db.collection("todo-items").doc(id).delete().then(() => {
+        console.log(id);
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
