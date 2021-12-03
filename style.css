@@ -8,7 +8,6 @@ body {
     font-family: 'Josefin Sans', sans-serif;
     background-color: hsl(235, 21%, 11%);
     font-size: 18px;
-    display: flex;
     justify-content: center;
 }
 
@@ -32,7 +31,7 @@ body {
     width: 100%;
     max-width: 700px;
     margin: 0px 30px;
-    margin-top: 100px;
+    margin: 100px auto 0;
 }
 
 .header {
@@ -206,4 +205,9 @@ body {
 .cancel img {
     width:20px;
     height:20px;
+}
+
+.test {
+    background:#fff;
+    padding:20px;
 }

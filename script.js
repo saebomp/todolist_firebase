@@ -8,7 +8,6 @@ addItem = (e) => {
     text.value = "";
 }
 
-
 const form = document.getElementById('submit-form');
 form.addEventListener('submit', addItem);
 
@@ -26,6 +25,7 @@ getItems = () => {
         })
         console.log(items);
         generateItems(items)
+        newElement(items)
     })
 }
 
@@ -80,16 +80,68 @@ markCompleted = (id) => {
 
 getItems();
 
-const deleteBtn = document.getElementById('deleteBtn');
-deleteBtn.addEventListener('click', deleteItem);
-
-
-//Delete
-deleteItem = (id) => {
-    console.log(id);
+let deleteBtn = document.getElementById('deleteBtn');
+deleteBtn.addEventListener('click', (id) => {
+    console.log('eeeee');
     db.collection("todo-items").doc(id).delete().then(() => {
         console.log(id);
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
-}
+})
+
+function newElement(items) {
+    let itemsHTML = ""
+    items.forEach((item)=> {
+        var todo_item = document.createElement('div');
+        todo_item.className = "todo-item";
+        var check = document.createElement('div');
+        check.className = "check";
+        var check_mark = document.createElement('div');
+        check_mark.className = "check-mark";
+        // check_mark = element.getAttribute('data-id')
+        check.appendChild(check_mark)
+
+        todo_item.appendChild(check)
+        // todo_item.innerHTML += `${item.text}`
+        test.appendChild(todo_item) 
+    })
+
+
+
+    // var li = document.createElement("li");
+    // var inputValue = document.getElementById("myInput").value;
+    // var t = document.createTextNode(inputValue);
+    // li.appendChild(t);
+    // if (inputValue === '') {
+    //   alert("You must write something!");
+    // } else {
+    //   document.getElementById("myUL").appendChild(li);
+    // }
+    // document.getElementById("myInput").value = "";
+  
+    // var span = document.createElement("SPAN");
+    // var txt = document.createTextNode("\u00D7");
+    // span.className = "close";
+    // span.appendChild(txt);
+    // li.appendChild(span);
+  
+    // for (i = 0; i < close.length; i++) {
+    //   close[i].onclick = function() {
+    //     var div = this.parentElement;
+    //     div.style.display = "none";
+    //   }
+    // }
+
+
+
+
+    // document.querySelector(".test").innerHTML = itemsHTML;
+    // createEventListeners()
+  }
+
+
+
+// var element = document. getElementById('myDivID');
+// var dataID = element. getAttribute('data-id');
+// var dataID = $('myDivID'). data('data-id');
