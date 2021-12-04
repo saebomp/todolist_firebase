@@ -202,10 +202,11 @@ body {
     flex-basis: 10%;
 }
 
-.cancel img {
+.cancel img, .cancel_image  {
     width:20px;
     height:20px;
 }
+
 
 .test {
     background:#fff;

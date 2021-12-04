@@ -91,21 +91,55 @@ deleteBtn.addEventListener('click', (id) => {
 })
 
 function newElement(items) {
-    let itemsHTML = ""
+    
     items.forEach((item)=> {
-        var todo_item = document.createElement('div');
+        let todo_item = document.createElement('div');
         todo_item.className = "todo-item";
-        var check = document.createElement('div');
+        let check = document.createElement('div');
         check.className = "check";
-        var check_mark = document.createElement('div');
-        check_mark.className = "check-mark";
-        // check_mark = element.getAttribute('data-id')
+        let check_mark = document.createElement('div');
+        if (`${item.status}` == "completed") {
+            check_mark.className = "check-mark checked"
+        }
+        else {
+            check_mark.className = "check-mark"
+        }
+        check_mark.setAttribute('data-id', `${item.id}`)
+        let image = document.createElement("img");
+        image.className = "check_images";
+        image.src = "assets/icon-check.svg";   
+        check_mark.appendChild(image)
         check.appendChild(check_mark)
 
+        let todo_text = document.createElement('div');
+        todo_text.className = "todo-text";
+        todo_text.setAttribute('data-id', `${item.id}`)
+        if (`${item.status}` == "completed") {
+            todo_text.className = "todo-text checked"
+        }
+        else {
+            todo_text.className = "todo-text"
+        }
+        todo_text.textContent = `${item.text}`
+
+        let cancel = document.createElement('div');
+        cancel.className = "cancel";
+        cancel.setAttribute('data-id', `${item.id}`)
+        cancel.setAttribute('id', 'deleteBtn')
+
+        let cancel_image = document.createElement("img");
+        cancel_image.className = "cancel_image";
+        cancel_image.src = "https://img.icons8.com/ios/50/ffffff/cancel.png";   
+        cancel.appendChild(cancel_image)
+        
+
+
         todo_item.appendChild(check)
-        // todo_item.innerHTML += `${item.text}`
+        todo_item.appendChild(todo_text)
+        todo_item.appendChild(cancel)
         test.appendChild(todo_item) 
     })
+    
 
 
 
