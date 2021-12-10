@@ -138,7 +138,6 @@ body {
     background-color: hsl(235, 24%, 19%);
     display: flex;
     border-bottom: 1px solid hsl(237, 14%, 26%);
-    cursor: pointer;
     transition: all .25s ease;
     transition-property: box-shadow, transform, border-color;
 }
@@ -200,6 +199,7 @@ body {
     justify-content: center;
     align-items:center;
     flex-basis: 10%;
+    cursor: pointer;
 }
 
 .cancel img, .cancel_image  {

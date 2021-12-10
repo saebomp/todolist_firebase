@@ -15,7 +15,7 @@ form.addEventListener('submit', addItem);
 //realtime
 getItems = () => {
     db.collection("todo-items").onSnapshot((snapshot) => {
-        // console.log(snapshot)
+        console.log('snapshot', snapshot)
         let items = [];
         snapshot.docs.forEach((doc)=> {
             items.push({
@@ -24,31 +24,31 @@ getItems = () => {
             })
         })
         console.log(items);
-        generateItems(items)
+        // generateItems(items)
         newElement(items)
     })
 }
 
-generateItems = (items) => {
-    let itemsHTML = ""
-    items.forEach((item)=> {
-        itemsHTML += `
-        <div class="todo-item">
-            <div class="check">
-                <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked": ""}">
-                    <img src="assets/icon-check.svg">
-                </div>
-            </div>
-            <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
-                ${item.text}
-            </div>
-            <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
-        </div>
-        `
-    })
-    document.querySelector(".todo-items").innerHTML = itemsHTML;
-    createEventListeners()
-}
+// generateItems = (items) => {
+//     let itemsHTML = ""
+//     items.forEach((item)=> {
+//         itemsHTML += `
+//         <div class="todo-item">
+//             <div class="check">
+//                 <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked": ""}">
+//                     <img src="assets/icon-check.svg">
+//                 </div>
+//             </div>
+//             <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
+//                 ${item.text}
+//             </div>
+//             <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
+//         </div>
+//         `
+//     })
+//     document.querySelector(".todo-items").innerHTML = itemsHTML;
+//     createEventListeners()
+// }
 
 createEventListeners = () => {
     let todoCheckMarks = document.querySelectorAll(".todo-item .check-mark")
@@ -80,15 +80,20 @@ markCompleted = (id) => {
 
 getItems();
 
-let deleteBtn = document.getElementById('deleteBtn');
-deleteBtn.addEventListener('click', (id) => {
-    console.log('eeeee');
-    db.collection("todo-items").doc(id).delete().then(() => {
-        console.log(id);
-    }).catch((error) => {
-        console.error("Error removing document: ", error);
-    });
-})
+let deleteBtn = document.getElementById("deleteBtn");
+
+if(deleteBtn){
+    deleteBtn.addEventListener("click", (id) => {
+        console.log('iddddd', id);
+        db.collection("todo-items").doc(id).delete().then(() => {
+            console.log(id);
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    })
+  }
+
+
 
 function newElement(items) {
     
@@ -132,15 +137,14 @@ function newElement(items) {
         cancel_image.src = "https://img.icons8.com/ios/50/ffffff/cancel.png";   
         cancel.appendChild(cancel_image)
         
-
-
         todo_item.appendChild(check)
         todo_item.appendChild(todo_text)
         todo_item.appendChild(cancel)
         test.appendChild(todo_item) 
     })
     
-
+    createEventListeners()
+}
 
 
     // var li = document.createElement("li");
@@ -171,8 +175,7 @@ function newElement(items) {
 
 
     // document.querySelector(".test").innerHTML = itemsHTML;
-    // createEventListeners()
-  }
+    // 
 
 
 
