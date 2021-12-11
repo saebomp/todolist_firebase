@@ -24,31 +24,32 @@ getItems = () => {
             })
         })
         console.log(items);
-        // generateItems(items)
-        newElement(items)
+        generateItems(items)
     })
 }
 
-// generateItems = (items) => {
-//     let itemsHTML = ""
-//     items.forEach((item)=> {
-//         itemsHTML += `
-//         <div class="todo-item">
-//             <div class="check">
-//                 <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked": ""}">
-//                     <img src="assets/icon-check.svg">
-//                 </div>
-//             </div>
-//             <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
-//                 ${item.text}
-//             </div>
-//             <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
-//         </div>
-//         `
-//     })
-//     document.querySelector(".todo-items").innerHTML = itemsHTML;
-//     createEventListeners()
-// }
+generateItems = (items) => {
+    let itemsHTML = ""
+    items.forEach((item)=> {
+        itemsHTML += 
+        `
+        <div class="todo-item">
+            <div class="check">
+                <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked": ""}">
+                    <img src="assets/icon-check.svg">
+                </div>
+            </div>
+            <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
+                ${item.text}
+            </div>
+            <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
+        </div>
+        `
+    })
+    document.querySelector(".todo-items").innerHTML = itemsHTML;
+    createEventListeners()
+    deleteItem()
+}
 
 createEventListeners = () => {
     let todoCheckMarks = document.querySelectorAll(".todo-item .check-mark")
@@ -80,71 +81,89 @@ markCompleted = (id) => {
 
 getItems();
 
-let deleteBtn = document.getElementById("deleteBtn");
 
-if(deleteBtn){
-    deleteBtn.addEventListener("click", (id) => {
-        console.log('iddddd', id);
-        db.collection("todo-items").doc(id).delete().then(() => {
-            console.log(id);
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-        });
+// deleteItem = () => {
+//     let deleteBtn = document.getElementById("deleteBtn");
+
+//     deleteBtn.addEventListener("click", (id) => {
+//         console.log('iddddd',);
+
+//         db.collection("todo-items").doc(id).delete().then(() => {
+//             console.log(id);
+//         }).catch((error) => {
+//             console.error("Error removing document: ", error);
+//         });
+//     })
+// }
+
+deleteItem = () => {
+    let deleteBtn = document.getElementById("deleteBtn");
+    deleteBtn.forEach((id) => {
+        id.addEventListener("click", () => {
+            removeItem(id.dataset.id)
+        })
     })
-  }
-
-
-
-function newElement(items) {
-    
-    items.forEach((item)=> {
-        let todo_item = document.createElement('div');
-        todo_item.className = "todo-item";
-        let check = document.createElement('div');
-        check.className = "check";
-        let check_mark = document.createElement('div');
-        if (`${item.status}` == "completed") {
-            check_mark.className = "check-mark checked"
-        }
-        else {
-            check_mark.className = "check-mark"
-        }
-        check_mark.setAttribute('data-id', `${item.id}`)
-        let image = document.createElement("img");
-        image.className = "check_images";
-        image.src = "assets/icon-check.svg";   
-        check_mark.appendChild(image)
-        check.appendChild(check_mark)
-
-        let todo_text = document.createElement('div');
-        todo_text.className = "todo-text";
-        todo_text.setAttribute('data-id', `${item.id}`)
-        if (`${item.status}` == "completed") {
-            todo_text.className = "todo-text checked"
-        }
-        else {
-            todo_text.className = "todo-text"
-        }
-        todo_text.textContent = `${item.text}`
-
-        let cancel = document.createElement('div');
-        cancel.className = "cancel";
-        cancel.setAttribute('data-id', `${item.id}`)
-        cancel.setAttribute('id', 'deleteBtn')
-
-        let cancel_image = document.createElement("img");
-        cancel_image.className = "cancel_image";
-        cancel_image.src = "https://img.icons8.com/ios/50/ffffff/cancel.png";   
-        cancel.appendChild(cancel_image)
-        
-        todo_item.appendChild(check)
-        todo_item.appendChild(todo_text)
-        todo_item.appendChild(cancel)
-        test.appendChild(todo_item) 
-    })
-    
-    createEventListeners()
+   
 }
+
+removeItem = (id) => {
+    db.collection("todo-items").doc(id).delete().then(() => {
+             console.log(id);
+    })
+}
+
+
+
+// function newElement(items) {
+    
+//     items.forEach((item)=> {
+//         let todo_item = document.createElement('div');
+//         todo_item.className = "todo-item";
+//         let check = document.createElement('div');
+//         check.className = "check";
+//         let check_mark = document.createElement('div');
+//         if (`${item.status}` == "completed") {
+//             check_mark.className = "check-mark checked"
+//         }
+//         else {
+//             check_mark.className = "check-mark"
+//         }
+//         check_mark.setAttribute('data-id', `${item.id}`)
+//         let image = document.createElement("img");
+//         image.className = "check_images";
+//         image.src = "assets/icon-check.svg";   
+//         check_mark.appendChild(image)
+//         check.appendChild(check_mark)
+
+//         let todo_text = document.createElement('div');
+//         todo_text.className = "todo-text";
+//         todo_text.setAttribute('data-id', `${item.id}`)
+//         if (`${item.status}` == "completed") {
+//             todo_text.className = "todo-text checked"
+//         }
+//         else {
+//             todo_text.className = "todo-text"
+//         }
+//         todo_text.textContent = `${item.text}`
+
+//         let cancel = document.createElement('div');
+//         cancel.className = "cancel";
+//         cancel.setAttribute('data-id', `${item.id}`)
+//         cancel.setAttribute('id', 'deleteBtn')
+
+//         let cancel_image = document.createElement("img");
+//         cancel_image.className = "cancel_image";
+//         cancel_image.src = "https://img.icons8.com/ios/50/ffffff/cancel.png";   
+//         cancel.appendChild(cancel_image)
+        
+//         todo_item.appendChild(check)
+//         todo_item.appendChild(todo_text)
+//         todo_item.appendChild(cancel)
+//         test.appendChild(todo_item) 
+//     })
+    
+//     createEventListeners()
+// }
 
 
     // var li = document.createElement("li");
