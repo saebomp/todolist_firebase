@@ -42,7 +42,7 @@ generateItems = (items) => {
             <div data-id="${item.id}" class="todo-text ${item.status == "completed" ? "checked": ""}">
                 ${item.text}
             </div>
-            <div class="cancel" data-id="${item.id}" id="deleteBtn"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
+            <div class="cancel" data-id="${item.id}"><img src="https://img.icons8.com/ios/50/ffffff/cancel.png"/></div>
         </div>
         `
     })
@@ -97,21 +97,19 @@ getItems();
 // }
 
 deleteItem = () => {
-    let deleteBtn = document.getElementById("deleteBtn");
+    let deleteBtn = document.querySelectorAll(".cancel")
     deleteBtn.forEach((id) => {
-        id.addEventListener("click", () => {
-            removeItem(id.dataset.id)
+        id.addEventListener('click', () => {
+            removeTodo(id.dataset.id)
         })
     })
-   
 }
 
-removeItem = (id) => {
+removeTodo = (id) => {
     db.collection("todo-items").doc(id).delete().then(() => {
-             console.log(id);
+
     })
 }
-
 
 
 // function newElement(items) {
